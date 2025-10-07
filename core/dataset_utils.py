@@ -36,3 +36,11 @@ def check_validity(atoms: ase.Atoms
 
     return True
 
+def _set_constraint(atoms: ase.Atoms
+    ) -> ase.Atoms:
+    zpos = atoms.positions[:, 2]
+    zpos_sorted = sorted(zpos, reverse=True)
+    fix_thrsh = zpos_sorted[int(len(atoms) / 2)]
+    constraint = FixAtoms(indices=[atom.index for atom in atoms if atom.position[2] < fix_thrsh+0.3])
+    atoms.set_constraint(constraint) 
+    return atoms
