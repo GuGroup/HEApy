@@ -32,13 +32,12 @@ def generate_random_slab(constituent_atoms: list[str],
 
     ===========================================================================
     '''
+    from .dataset_utils import _set_constraint
     from ..utils.globals import LATTICE_CONSTANTS
     
     lattice = 0
-
     for constituent_atom in constituent_atoms:
         lattice += LATTICE_CONSTANTS[constituent_atom]
-    
     lattice = lattice / len(constituent_atoms)
 
     atoms = fcc111("Cu", 
@@ -72,12 +71,49 @@ def generate_random_slab(constituent_atoms: list[str],
 
     return atoms
 
-def _set_constraint(atoms: ase.Atoms
+def generate_random_bulk(constituent_atoms: list[str],
+                         size: tuple | list = (2, 2, 2),
     ) -> ase.Atoms:
-    zpos = atoms.positions[:, 2]
-    zpos_sorted = sorted(zpos, reverse=True)
-    fix_thrsh = zpos_sorted[int(len(atoms) / 2)]
-    constraint = FixAtoms(indices=[atom.index for atom in atoms if atom.position[2] < fix_thrsh+0.3])
-    atoms.set_constraint(constraint) 
+    from ase.build import bulk
+    
+    from ..utils.globals import LATTICE_CONSTANTS
+    r'''
+    ===========================================================================
+    Generate random high entropy alloy bulk
+
+    Args:
+        constituent_atoms: Atom symbols in high-entropy alloy, ["Co", "Ni", "Cu", "Ru"]
+        size: repeat of slab, (2, 2, 2)
+
+    Output:
+        ase.Atoms
+
+    ===========================================================================
+    '''
+    
+    lattice = 0
+    for constituent_atom in constituent_atoms:
+        lattice += LATTICE_CONSTANTS[constituent_atom]
+    lattice = lattice / len(constituent_atoms)
+    
+    constituent_atom_numbers = []
+    for atom_symbol in constituent_atoms:
+        atom_temp = ase.Atoms(atom_symbol)
+        constituent_atom_numbers.append(atom_temp.get_atomic_numbers()[0])
+    
+    atoms = bulk("Cu",
+                 "fcc",
+                 a=lattice,
+                 cubic=True)
+
+    atoms = atoms.repeat(size)
+    
+    random_atom_sequence = np.random.choice(constituent_atom_numbers,
+                                            len(atoms),
+                                            replace=True).tolist()
+
+    atoms.set_atomic_numbers(random_atom_sequence)
+
     return atoms
+
 
