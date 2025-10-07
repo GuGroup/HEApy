@@ -1,2 +1,2 @@
 # HEApy
-Melancholy for high-entropy alloy
+Stable VASP generation and fine-tuning
