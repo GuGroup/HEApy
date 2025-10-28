@@ -38,9 +38,20 @@ def check_validity(atoms: ase.Atoms
 
 def _set_constraint(atoms: ase.Atoms
     ) -> ase.Atoms:
+    from ase.constraints import FixAtoms
+
     zpos = atoms.positions[:, 2]
     zpos_sorted = sorted(zpos, reverse=True)
     fix_thrsh = zpos_sorted[int(len(atoms) / 2)]
     constraint = FixAtoms(indices=[atom.index for atom in atoms if atom.position[2] < fix_thrsh+0.3])
     atoms.set_constraint(constraint) 
     return atoms
+
+def get_binding_atom(atoms: ase.Atoms
+    ) -> str:
+    entire_z_positions = sorted(list(set(atoms.positions[:, 2])))
+    for atom in atoms:
+        if atom.position[2] == entire_z_positions[-1] and atom.position[0] == 0 and atom.position[0] == 0:
+            first_atom_symbol = atom.symbol
+
+    return first_atom_symbol
