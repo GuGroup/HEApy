@@ -1,7 +1,7 @@
 #!/bin/bash
 #$ -V                    # export all environment variables
 #$ -S /bin/bash          # command interpreter to be used
-#$ -N LA                 # job name
+#$ -N HEA                 # job name
 #$ -q 64core.q              # queue type
 #$ -pe mpi_64 64        # request slot range for parallel jobs mpi_(core per node) (total core)
 #$ -j Y                  # merge e and o file and pe and po file

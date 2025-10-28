@@ -13,13 +13,13 @@ def submit_a_job(job_path: Path,
     Returns:
         None
     '''
-    qsub_file_path = Path(__file__) / "submit_vasp.sh"
+    qsub_file_path = [Path(__file__).parent / "submit_vasp.sh"]
     
     if core_64:
-        qsub_file_path = Path(__file__) / "submit_vasp_64.sh"
+        qsub_file_path = [Path(__file__).parent / "submit_vasp_64.sh"]
 
     process = subprocess.Popen(
-            ["qsub"] + str(qsub_file_path),
+            ["qsub"] + qsub_file_path,
             cwd=job_path,
             stdout=subprocess.PIPE,
             stderr=subprocess.STDOUT,

@@ -1,6 +1,20 @@
 # ytk
 # ytk
 
+from pathlib import Path
+
+UMA_CKPT_PATH = Path("/home/ytk/HAE/DFTs/AlFeCoNiCu/dataset_224/uma_fine_tuning/202510-2318-0020-853f/checkpoints/final/inference_ckpt.pt")
+
+COLORMAP = {"total": "grey",
+            "Co": "lightcoral",
+            "Ni": "lime",
+            "Cu": "darkgoldenrod",
+            "Ru": "teal",
+            "Al": "rosybrown",  
+            "Fe": "coral",
+            }
+
+
 #THIS LATTICE_CONSTANTS is not accurate
 LATTICE_CONSTANTS = {
                      "Al": 4.049,
@@ -56,3 +70,50 @@ MAGMOMS = {"Al": 0.0,
            "V": 1.0,
            "W": 0.0,
            "Zr": 0.0}
+
+POTENTIAL_ENERGY = {
+        "H2": -6.97736696,
+        "H2O": -14.15696269,
+        "HNO3": -27.693,
+        }
+
+ZPE = {
+       "CoNiCuRu": {
+           "Co": 0.1220,
+           "Ni": 0.1309,
+           "Cu": 0.1306,
+           "Ru": 0.1939,
+        },
+       "AlFeCoNiCu": {
+           "Al": 0.15856,
+           "Fe": 0.19014,
+           "Co": 0.19244,
+           "Ni": 0.17431,
+           "Cu": 0.19389,
+       },
+       "H2": 0.277,
+       "H2O": 0.586,
+       "HNO3": 0.703
+       }
+
+# on 300K, only vib!
+TS = {
+      "CoNiCuRu":{
+          "Co": 0.177,
+          "Ni": 0.258,
+          "Cu": 0.125,
+          "Ru": 0.099,
+      },
+
+      "AlFeCoNiCu":{
+          "Al": 0.133,
+          "Fe": 0.169,
+          "Co": 0.100,
+          "Ni": 0.213,
+          "Cu": 0.148,
+      },
+      "H2": 0.407,
+      "H2O": 0.578,
+      "HNO3": 0.781
+      }
+
