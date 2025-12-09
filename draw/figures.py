@@ -342,7 +342,7 @@ def draw_parity_plot(
 
         target_gibbs_free_energy = get_gibbs_free_energy(slab_target.calc.get_potential_energy(),
                                                          adslab_target.calc.get_potential_energy(),
-                                                         hea_type="AlFeCoNiCu",
+                                                         hea_type="CoNiCuRu",
                                                          binding_site_atom=binding_site_atom
                                                          )
 
@@ -351,7 +351,7 @@ def draw_parity_plot(
 
         prediction_gibbs_free_energy = get_gibbs_free_energy(slab_prediction.calc.get_potential_energy(),
                                                              adslab_prediction.calc.get_potential_energy(),
-                                                             hea_type="AlFeCoNiCu",
+                                                             hea_type="CoNiCuRu",
                                                              binding_site_atom=binding_site_atom
                                                              )
 
