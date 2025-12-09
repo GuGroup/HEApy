@@ -58,7 +58,7 @@ def assemble_gibbs_free_energy_result(
     file_name: str = "OUTCAR"
     ) -> None:
 
-    result = {"total": [], "Al": [], "Fe": [], "Co": [], "Ni": [], "Cu": []}
+    result = {"total": [], "Co": [], "Ni": [], "Cu": [], "Ru": []}
 
     for calculation_path in tqdm(calculation_paths.glob("*")):
         if calculation_path.is_dir():
