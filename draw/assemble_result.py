@@ -33,7 +33,7 @@ def assemble_test_result(
 
             target_gibbs_free_energy = get_gibbs_free_energy(slab_target.calc.get_potential_energy(),
                                                              adslab_target.calc.get_potential_energy(),
-                                                             hea_type="AlFeCoNiCu",
+                                                             hea_type="CoNiCuRu",
                                                              binding_site_atom=binding_site_atom
                                                              )
 
@@ -42,7 +42,7 @@ def assemble_test_result(
 
             prediction_gibbs_free_energy = get_gibbs_free_energy(slab_prediction.calc.get_potential_energy(),
                                                                  adslab_prediction.calc.get_potential_energy(),
-                                                                 hea_type="AlFeCoNiCu",
+                                                                 hea_type="CoNiCuRu",
                                                                  binding_site_atom=binding_site_atom
                                                                  )
 
@@ -70,7 +70,7 @@ def assemble_gibbs_free_energy_result(
             gibbs_free_energy = get_gibbs_free_energy(
                     slab.calc.get_potential_energy(),
                     adslab.calc.get_potential_energy(),
-                    hea_type="AlFeCoNiCu",
+                    hea_type="CoNiCuRu",
                     binding_site_atom=binding_site_atom
             )
             
