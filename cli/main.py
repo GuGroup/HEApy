@@ -6,8 +6,8 @@ from pathlib import Path
 def run_assemble_result():
     from ..draw.assemble_result import assemble_gibbs_free_energy_result
     
-    dft_paths = Path("/home/ytk/HAE/DFTs/AlFeCoNiCu/slab_224")
-    dft_save_path = Path("/home/ytk/HAE/DFTs/AlFeCoNiCu/results/dft_result.json")
+    dft_paths = Path("/home/ytk/HAE/DFTs/CoNiCuRu/slab_224")
+    dft_save_path = Path("/home/ytk/HAE/DFTs/CoNiCuRu/results/dft_result.json")
 
     assemble_gibbs_free_energy_result(
         calculation_paths=dft_paths,
@@ -16,8 +16,8 @@ def run_assemble_result():
     )
     
 
-    uma_paths = Path("/home/ytk/HAE/DFTs/AlFeCoNiCu/prediction_224")
-    uma_save_path = Path("/home/ytk/HAE/DFTs/AlFeCoNiCu/results/uma_result.json")
+    uma_paths = Path("/home/ytk/HAE/DFTs/CoNiCuRu/prediction_224")
+    uma_save_path = Path("/home/ytk/HAE/DFTs/CoNiCuRu/results/uma_result.json")
     assemble_gibbs_free_energy_result(
         calculation_paths=uma_paths,
         save_path=uma_save_path,
@@ -30,8 +30,8 @@ def run_draw():
                                 draw_volcano_plot
     )
 
-    dft_result = Path("/home/ytk/HAE/DFTs/AlFeCoNiCu/results/dft_result.json")
-    uma_result = Path("/home/ytk/HAE/DFTs/AlFeCoNiCu/results/uma_result.json")
+    dft_result = Path("/home/ytk/HAE/DFTs/CoNiCuRu/results/dft_result.json")
+    uma_result = Path("/home/ytk/HAE/DFTs/CoNiCuRu/results/uma_result.json")
     draw_gibbs_free_energy_distribution(
         dft_result_path=dft_result,
         uma_result_path=uma_result
@@ -42,7 +42,7 @@ def run_prediction():
     from ..tests.tests import relaxation_prediction
     from ..utils.globals import UMA_CKPT_PATH
 
-    calculation_paths = Path("/home/ytk/HAE/DFTs/AlFeCoNiCu/prediction_224")
+    calculation_paths = Path("/home/ytk/HAE/DFTs/CoNiCuRu/prediction_224")
     
     for calculation_path in calculation_paths.glob("*"):
         slab_path = calculation_path / "slab"
@@ -61,7 +61,7 @@ def run_evaluation():
     from ..tests.tests import singlepoint_prediction, relaxation_prediction
     from ..utils.globals import UMA_CKPT_PATH
     
-    calculation_path = Path("/home/ytk/HAE/DFTs/AlFeCoNiCu/slab_224/Cu_38/adslab/")
+    calculation_path = Path("/home/ytk/HAE/DFTs/CoNiCuRu/slab_224/Cu_38/adslab/")
 
 
     '''
@@ -69,13 +69,13 @@ def run_evaluation():
     ---------------------------------
     singlepoint_prediction(
            ckpt_path=UMA_CKPT_PATH,
-           dataset_path=Path("/home/ytk/HAE/DFTs/AlFeCoNiCu/dataset_224/test/test.xyz"),
-           result_path=Path("/home/ytk/HAE/DFTs/AlFeCoNiCu/dataset_224/singlepoint_prediction_result.pt")
+           dataset_path=Path("/home/ytk/HAE/DFTs/CoNiCuRu/dataset_224/test/test.xyz"),
+           result_path=Path("/home/ytk/HAE/DFTs/CoNiCuRu/dataset_224/singlepoint_prediction_result.pt")
     )
     
     Example of relaxation_prediction
     --------------------------------
-    split_log = json.load(open("/home/ytk/HAE/DFTs/AlFeCoNiCu/dataset_224/split_log.json", "r"))
+    split_log = json.load(open("/home/ytk/HAE/DFTs/CoNiCuRu/dataset_224/split_log.json", "r"))
     
     for calculation_path in split_log["test"].keys():
         relaxation_prediction(ckpt_path=UMA_CKPT_PATH,
@@ -90,7 +90,7 @@ def run_slab_generation():
     from ..VASP.write_vasp_inputs import write_vasp_inputs
     
     adsorbate_path = Path(__file__).parents[1] / "VASP" / "NO_CONTCAR"
-    calculation_path = Path("/home/ytk/HAE/DFTs/AlFeCoNiCu/prediction_224") 
+    calculation_path = Path("/home/ytk/HAE/DFTs/CoNiCuRu/prediction_224") 
     generate_random_slab(constituent_atoms=["Al", "Fe", "Co", "Ni", "Cu"],
                          calculation_path=calculation_path,
                          size=(2, 2, 4),
@@ -105,8 +105,8 @@ def run_slab_generation():
     -------------------------------
 
     adsorbate_path = Path(__file__).parents[1] / "VASP" / "NO_CONTCAR"
-    calculation_path = Path("/home/ytk/HAE/DFTs/AlFeCoNiCu/slab_336") 
-    generate_random_slab(constituent_atoms=["Al", "Fe", "Co", "Ni", "Cu"],
+    calculation_path = Path("/home/ytk/HAE/DFTs/CoNiCuRu/slab_336") 
+    generate_random_slab(constituent_atoms=["Co", "Ni", "Cu", "Ru"],
                          calculation_path=calculation_path,
                          size=(3, 3, 6),
                          constraint=True,
@@ -147,9 +147,9 @@ def run_adslab_zpe_generation():
     """
     Example of generate_adslab_zpe
     ------------------------------
-    Al_0 = Path("/home/ytk/HAE/DFTs/AlFeCoNiCu/slab_224/Al_0/adslab/CONTCAR")
-    Al_save_path = Path("/home/ytk/HAE/DFTs/AlFeCoNiCu/ZPE/Al")
-    generate_adslab_zpe(Al_0, Al_save_path)
+    Co_0 = Path("/home/ytk/HAE/DFTs/CoNiCuRu/slab_224/Al_0/adslab/CONTCAR")
+    Co_save_path = Path("/home/ytk/HAE/DFTs/CoNiCuRu/ZPE/")
+    generate_adslab_zpe(Co_0, Co_save_path)
 
     """
 def run_zpe_calculation():
@@ -157,16 +157,16 @@ def run_zpe_calculation():
     
     """
     Example of calculate_zpe and calculate_entropy
-    Al_save_path = Path("/home/ytk/HAE/DFTs/AlFeCoNiCu/ZPE/Al")
-    calculate_zpe(Al_save_path)
-    calculate_entropy(Al_save_path)
+    Co_save_path = Path("/home/ytk/HAE/DFTs/CoNiCuRu/ZPE/Co")
+    calculate_zpe(Co_save_path)
+    calculate_entropy(Co_save_path)
     """
 
 def run_job_submit():
     from ..VASP.submit_job import submit_a_job
     
     '''
-    calculation_path = Path("/home/ytk/HAE/DFTs/AlFeCoNiCu/slab_336")
+    calculation_path = Path("/home/ytk/HAE/DFTs/CoNiCuRu/slab_336")
     for vasp_path in calculation_path.glob("*"):
         submit_a_job(vasp_path / "slab", core_64=True)
     '''
@@ -178,8 +178,8 @@ def run_preprocessing():
     """
     Example of collect_outcar
     -------------------------
-    collect_outcar(calculation_path=Path("/home/ytk/HAE/DFTs/AlFeCoNiCu/slab_224"),
-                   save_path=Path("/home/ytk/HAE/DFTs/AlFeCoNiCu/dataset_224"),
+    collect_outcar(calculation_path=Path("/home/ytk/HAE/DFTs/CoNiCuRu/slab_224"),
+                   save_path=Path("/home/ytk/HAE/DFTs/CoNiCuRu/dataset_224"),
                    )
     """
 
